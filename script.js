@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // ===== calc tips
+const MONTH_FACTOR = 4.33; // среднее количество недель в месяце
+const AVERAGE_SCHEDULE = { hours: 6, days: 5 };
+const AVERAGE_EXPENSES = 150;
 const MODE_TIPS = {
   walk: 'Пеший курьер — удобнее в центре и рядом с метро. Ставьте короткие слоты в час-пик.',
   bike: 'Велосипед — идеален для плотной застройки и парков. Проверьте подсветку/дождевик.',
@@ -91,13 +94,29 @@ function updateCalcHint(){
   const citySel = document.getElementById('citySelect');
   const modeSel = document.getElementById('modeSelect');
   const hint = document.getElementById('calcHint');
+  const hoursRange = document.getElementById('hoursRange');
+  const daysRange = document.getElementById('daysRange');
+  const tipsInput = document.getElementById('tipsInput');
+  const expensesInput = document.getElementById('expensesInput');
   if(!(citySel && modeSel && hint)) return;
   const modeKey = modeSel.value || 'walk';
-  const city = citySel.value || 'вашем городе';
-  hint.textContent = (MODE_TIPS[modeKey] || '') + ' · ' + 'Совет для ' + city + ': начинайте в час-пик и следите за погодой — осенью спрос выше.';
+  const cityName = citySel.value || 'вашем городе';
+  const hours = hoursRange ? parseInt(hoursRange.value, 10) : 0;
+  const days = daysRange ? parseInt(daysRange.value, 10) : 0;
+  const city = CITY_DATA.find(c => c.name === citySel.value) || CITY_DATA[0];
+  const mode = MODE_OPTIONS.find(m => m.key === modeSel.value) || MODE_OPTIONS[0];
+  const tips = tipsInput ? parseFloat(tipsInput.value) || 0 : 0;
+  const expenses = expensesInput ? parseFloat(expensesInput.value) || 0 : 0;
+  const baseDaily = (mode?.hourlyRate || 0) * hours * (city?.multiplier || 1);
+  const dailyGross = baseDaily + tips;
+  const dailyNet = Math.max(dailyGross - expenses, 0);
+  const netValue = Math.round(dailyNet);
+  const hasSchedule = hours > 0 && days > 0 && !Number.isNaN(netValue);
+  const netText = hasSchedule ? ` · При ${hours} ч/день и ${days} дн/неделе ориентир ${netValue.toLocaleString('ru-RU')} ₽ чистыми.` : '';
+  hint.textContent = (MODE_TIPS[modeKey] || '') + ' · Совет для ' + cityName + ': начинайте в час-пик и следите за погодой — осенью спрос выше.' + netText;
 }
 document.addEventListener('input', (e)=>{
-  if(e.target && (e.target.id==='citySelect' || e.target.id==='modeSelect' || e.target.id==='hoursRange' || e.target.id==='daysRange')){
+  if(e.target && (e.target.id==='citySelect' || e.target.id==='modeSelect' || e.target.id==='hoursRange' || e.target.id==='daysRange' || e.target.id==='tipsInput' || e.target.id==='expensesInput')){
     updateCalcHint();
   }
 });
@@ -112,23 +131,31 @@ const MODE_OPTIONS = [
   { key: 'auto', label: 'Авто', hourlyRate: 550 }
 ];
 const CITY_DATA = [
-  { name: 'Москва', multiplier: 1.2 },
-  { name: 'Санкт‑Петербург', multiplier: 1.15 },
-  { name: 'Екатеринбург', multiplier: 1.1 },
-  { name: 'Новосибирск', multiplier: 1.05 },
-  { name: 'Казань', multiplier: 1.05 },
-  { name: 'Краснодар', multiplier: 1.05 },
-  { name: 'Нижний Новгород', multiplier: 1.0 },
-  { name: 'Ростов-на-Дону', multiplier: 1.0 },
-  { name: 'Самара', multiplier: 1.0 },
-  { name: 'Уфа', multiplier: 0.95 },
-  { name: 'Пермь', multiplier: 0.95 },
-  { name: 'Воронеж', multiplier: 0.95 },
-  { name: 'Челябинск', multiplier: 0.95 },
-  { name: 'Красноярск', multiplier: 0.9 },
-  { name: 'Омск', multiplier: 0.9 },
-  { name: 'Саратов', multiplier: 0.9 }
+  { name: 'Москва', multiplier: 1.2, avgTips: 320 },
+  { name: 'Санкт‑Петербург', multiplier: 1.15, avgTips: 300 },
+  { name: 'Екатеринбург', multiplier: 1.1, avgTips: 270 },
+  { name: 'Новосибирск', multiplier: 1.05, avgTips: 260 },
+  { name: 'Казань', multiplier: 1.05, avgTips: 250 },
+  { name: 'Краснодар', multiplier: 1.05, avgTips: 250 },
+  { name: 'Нижний Новгород', multiplier: 1.0, avgTips: 230 },
+  { name: 'Ростов-на-Дону', multiplier: 1.0, avgTips: 230 },
+  { name: 'Самара', multiplier: 1.0, avgTips: 220 },
+  { name: 'Уфа', multiplier: 0.95, avgTips: 210 },
+  { name: 'Пермь', multiplier: 0.95, avgTips: 210 },
+  { name: 'Воронеж', multiplier: 0.95, avgTips: 200 },
+  { name: 'Челябинск', multiplier: 0.95, avgTips: 200 },
+  { name: 'Красноярск', multiplier: 0.9, avgTips: 190 },
+  { name: 'Омск', multiplier: 0.9, avgTips: 190 },
+  { name: 'Саратов', multiplier: 0.9, avgTips: 180 }
 ];
+
+function calculateAverageHourlyRate() {
+  if (!MODE_OPTIONS.length) {
+    return 0;
+  }
+  const total = MODE_OPTIONS.reduce((sum, mode) => sum + (mode.hourlyRate || 0), 0);
+  return total / MODE_OPTIONS.length;
+}
 
 /**
  * Populate select options for city and mode, and set up event listeners
@@ -143,6 +170,12 @@ function initCalculator() {
   const dayIncome = document.getElementById('dayIncome');
   const weekIncome = document.getElementById('weekIncome');
   const monthIncome = document.getElementById('monthIncome');
+  const dayIncomeNet = document.getElementById('dayIncomeNet');
+  const weekIncomeNet = document.getElementById('weekIncomeNet');
+  const monthIncomeNet = document.getElementById('monthIncomeNet');
+  const tipsInput = document.getElementById('tipsInput');
+  const expensesInput = document.getElementById('expensesInput');
+  const cityAverage = document.getElementById('cityAverage');
 
   if (!citySelect || !modeSelect) return;
 
@@ -187,32 +220,63 @@ function initCalculator() {
     });
   }
 
+  function formatCurrency(value) {
+    return Math.round(value).toLocaleString('ru-RU') + ' ₽';
+  }
+
   // Compute and display incomes
   function updateIncome() {
     const hours = parseInt(hoursRange.value, 10);
     const days = parseInt(daysRange.value, 10);
     const city = CITY_DATA.find(c => c.name === citySelect.value) || CITY_DATA[0];
     const mode = MODE_OPTIONS.find(m => m.key === modeSelect.value) || MODE_OPTIONS[0];
-    const daily = mode.hourlyRate * hours * city.multiplier;
-    const weekly = daily * days;
-    const monthly = weekly * 4;
-    dayIncome.textContent = Math.round(daily).toLocaleString('ru-RU') + ' ₽';
-    weekIncome.textContent = Math.round(weekly).toLocaleString('ru-RU') + ' ₽';
-    monthIncome.textContent = Math.round(monthly).toLocaleString('ru-RU') + ' ₽';
+    const tips = tipsInput ? parseFloat(tipsInput.value) || 0 : 0;
+    const expenses = expensesInput ? parseFloat(expensesInput.value) || 0 : 0;
+    const baseDaily = mode.hourlyRate * hours * city.multiplier;
+    const dailyGross = baseDaily + tips;
+    const weeklyGross = dailyGross * days;
+    const monthlyGross = weeklyGross * MONTH_FACTOR;
+    const dailyNet = Math.max(dailyGross - expenses, 0);
+    const weeklyNetValue = Math.max(dailyNet * days, 0);
+    const monthlyNetValue = weeklyNetValue * MONTH_FACTOR;
+    dayIncome.textContent = formatCurrency(dailyGross);
+    weekIncome.textContent = formatCurrency(weeklyGross);
+    monthIncome.textContent = formatCurrency(monthlyGross);
+    if (dayIncomeNet) dayIncomeNet.textContent = 'Чистыми ' + formatCurrency(dailyNet);
+    if (weekIncomeNet) weekIncomeNet.textContent = 'Чистыми ' + formatCurrency(weeklyNetValue);
+    if (monthIncomeNet) monthIncomeNet.textContent = 'Чистыми ' + formatCurrency(monthlyNetValue);
     hoursValue.textContent = hours;
     daysValue.textContent = days;
   }
 
+  function updateCityAverage() {
+    if (!cityAverage) return;
+    const city = CITY_DATA.find(c => c.name === citySelect.value) || CITY_DATA[0];
+    if (!city) {
+      cityAverage.textContent = '';
+      return;
+    }
+    const avgHourly = calculateAverageHourlyRate();
+    const baseDaily = avgHourly * AVERAGE_SCHEDULE.hours * city.multiplier;
+    const dailyGross = baseDaily + (city.avgTips || 0);
+    const dailyNet = Math.max(dailyGross - AVERAGE_EXPENSES, 0);
+    const monthlyNet = dailyNet * AVERAGE_SCHEDULE.days * MONTH_FACTOR;
+    cityAverage.textContent = `Средний по городу: ${formatCurrency(dailyGross)} за смену · ~${formatCurrency(monthlyNet)} в месяц`;
+  }
+
   // Listen to changes
-  citySelect.addEventListener('change', () => { updateIncome(); updateCalcHint(); });
+  citySelect.addEventListener('change', () => { updateIncome(); updateCalcHint(); updateCityAverage(); });
   modeSelect.addEventListener('change', () => { updateActiveModeIcon(); updateIncome(); updateCalcHint(); });
   hoursRange.addEventListener('input', updateIncome);
   daysRange.addEventListener('input', updateIncome);
+  tipsInput && tipsInput.addEventListener('input', updateIncome);
+  expensesInput && expensesInput.addEventListener('input', updateIncome);
 
   // Initialize
   updateActiveModeIcon();
   updateIncome();
   updateCalcHint();
+  updateCityAverage();
 }
 
 // Initialize calculator on DOMContentLoaded

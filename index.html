@@ -140,13 +140,36 @@
           Дней в неделю: <span id="daysValue" class="calc-value">5</span>
           <input type="range" id="daysRange" min="1" max="7" value="5" step="1" aria-label="Дни в неделю">
         </label>
-        <p class="calc-note">* Это примерный порядок цифр, он зависит от спроса, времени суток и бонусов.</p>
+        <label class="calc-label">
+          Средние чаевые за смену, ₽
+          <input type="number" id="tipsInput" min="0" step="50" value="250" inputmode="numeric" aria-label="Средние чаевые за смену">
+          <span class="calc-help">Сумма, которую обычно оставляют клиенты поверх тарифа.</span>
+        </label>
+        <label class="calc-label">
+          Ежедневные расходы, ₽
+          <input type="number" id="expensesInput" min="0" step="50" value="150" inputmode="numeric" aria-label="Ежедневные расходы">
+          <span class="calc-help">Транспорт, связь, амортизация оборудования.</span>
+        </label>
+        <p class="calc-note">* Это примерный порядок цифр, он зависит от спроса, времени суток и чаевых.</p>
         <p class="calc-hint" id="calcHint" aria-live="polite"></p>
+        <p class="city-average" id="cityAverage" aria-live="polite"></p>
       </div>
       <div class="calc-result">
-        <div class="result-card"><div>День</div><strong id="dayIncome">—</strong></div>
-        <div class="result-card"><div>Неделя</div><strong id="weekIncome">—</strong></div>
-        <div class="result-card"><div>Месяц ~</div><strong id="monthIncome">—</strong></div>
+        <div class="result-card">
+          <div>День</div>
+          <strong id="dayIncome">—</strong>
+          <span class="result-sub" id="dayIncomeNet">Чистыми —</span>
+        </div>
+        <div class="result-card">
+          <div>Неделя</div>
+          <strong id="weekIncome">—</strong>
+          <span class="result-sub" id="weekIncomeNet">Чистыми —</span>
+        </div>
+        <div class="result-card">
+          <div>Месяц ~</div>
+          <strong id="monthIncome">—</strong>
+          <span class="result-sub" id="monthIncomeNet">Чистыми —</span>
+        </div>
         <a class="btn btn-primary btn-wide" data-role="apply-cta" href="https://ya.cc/t/-yGszGNW7iYQXz" target="_blank" rel="noopener">Стать курьером</a>
       </div>
     </div>
