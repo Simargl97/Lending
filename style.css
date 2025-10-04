@@ -154,6 +154,8 @@ body{
 /* hints */
 .calc-hint{margin-top:6px;color:#333;font-size:14px}
 .theme-dark .calc-hint{color:#ddd}
+.city-average{margin-top:8px;font-size:14px;color:#444;font-weight:500;line-height:1.5}
+.theme-dark .city-average{color:#ccc}
 
 .test p{line-height:1.6}
 
@@ -258,6 +260,22 @@ body{
   font-size:14px;
   color:#000;
 }
+.calc-label input[type="number"]{
+  margin-top:6px;
+  padding:8px 10px;
+  border:1px solid #d4d4d4;
+  border-radius:8px;
+  background:#fff;
+  font-size:14px;
+  color:#000;
+}
+.calc-help{
+  margin-top:4px;
+  font-weight:400;
+  font-size:12px;
+  color:#666;
+  line-height:1.4;
+}
 input[type="range"]{
   accent-color:var(--orange);
   height:4px;
@@ -338,9 +356,54 @@ input[type="range"]::-moz-range-thumb{
   box-shadow:0 8px 24px rgba(0,0,0,0.06);
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:16px;
   align-items:stretch;
   justify-content:flex-start;
+}
+.calc-summary{
+  background:#fffef5;
+  border:1px solid #ffe08a;
+  border-radius:12px;
+  padding:14px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.calc-summary-title{
+  margin:0;
+  font-size:16px;
+  font-weight:700;
+  text-align:center;
+  color:var(--black);
+}
+.calc-summary-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.calc-summary-list li{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  text-align:center;
+  background:#fff;
+  border-radius:10px;
+  padding:10px 12px;
+  box-shadow:inset 0 0 0 1px rgba(255,224,138,0.35);
+}
+.calc-summary-list li span:first-child{
+  font-size:13px;
+  color:#555;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+}
+.calc-summary-list strong{
+  font-size:20px;
+  font-weight:700;
+  color:var(--black);
 }
 .result-card{
   background:#fffef5;
@@ -353,6 +416,10 @@ input[type="range"]::-moz-range-thumb{
   justify-content:center;
   gap:4px;
 }
+.result-card--compact{
+  background:#ffffff;
+  border-color:#d6e2ff;
+}
 .result-card div{
   font-size:14px;
   color:#555;
@@ -361,6 +428,39 @@ input[type="range"]::-moz-range-thumb{
   font-size:20px;
   font-weight:700;
   color:var(--black);
+}
+.result-sub{
+  font-size:13px;
+  color:#777;
+}
+.calc-average-panel{
+  margin-top:8px;
+  padding:16px;
+  border-radius:14px;
+  background:linear-gradient(135deg, #eef3ff 0%, #f9fbff 100%);
+  border:1px solid #d6e2ff;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.calc-average-title{
+  margin:0;
+  font-size:16px;
+  font-weight:700;
+  text-align:center;
+  color:var(--black);
+}
+.calc-average-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:12px;
+}
+.calc-average-note{
+  margin:0;
+  font-size:13px;
+  color:#556072;
+  line-height:1.5;
+  text-align:center;
 }
 @media (max-width:600px){
   .calc-grid{
