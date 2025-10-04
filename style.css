@@ -24,18 +24,15 @@ body{
   line-height:1.45;
 }
 
+.top-bg{
+  background:url('images/background.png') center/cover no-repeat;
+}
+
 /* CONTAINER */
 .container{width:95%;max-width:var(--max-width);margin:0 auto}
 
 /* HERO */
-.hero{position:relative;color:var(--white);padding:48px 0;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6)),
-    url('images/background.png');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  min-height:520px;display:flex;align-items:center;overflow:hidden}
+.hero{position:relative;color:var(--white);padding:48px 0;min-height:520px;display:flex;align-items:center;overflow:hidden}
 .hero.small{min-height:240px;padding:36px 0}
 .hero-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%}
 .hero-left{flex:1 1 560px; text-align:left}
@@ -114,15 +111,12 @@ body{
 .faq-item:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,0.12)}
 
 /* CTA HERO */
-.cta-hero{position:relative;background:
-  linear-gradient(180deg,rgba(0,0,0,0.4),rgba(0,0,0,0.7)),
-  url('images/PartherMan2.jpg');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  color:var(--white);text-align:center;padding:48px 0;border-radius:12px;overflow:hidden}
+.cta-hero{position:relative;background:none;color:var(--white);text-align:center;padding:48px 0;border-radius:12px;overflow:hidden}
 .cta-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,0.45),rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.65));pointer-events:none}
 .cta-inner{max-width:820px;margin:0 auto;position:relative;z-index:1}
+
+.top-bg .intro{color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.top-bg .intro .lead{color:rgba(255,255,255,0.92)}
 
 /* PRODUCTS PAGE */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
