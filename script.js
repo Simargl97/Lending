@@ -197,9 +197,15 @@ function initCalculator() {
     const daily = mode.hourlyRate * hours * city.multiplier;
     const weekly = daily * days;
     const monthly = weekly * 4;
-    dayIncome.textContent = Math.round(daily).toLocaleString('ru-RU') + ' ₽';
-    weekIncome.textContent = Math.round(weekly).toLocaleString('ru-RU') + ' ₽';
-    monthIncome.textContent = Math.round(monthly).toLocaleString('ru-RU') + ' ₽';
+    if (dayIncome) {
+      dayIncome.textContent = Math.round(daily).toLocaleString('ru-RU') + ' ₽';
+    }
+    if (weekIncome) {
+      weekIncome.textContent = Math.round(weekly).toLocaleString('ru-RU') + ' ₽';
+    }
+    if (monthIncome) {
+      monthIncome.textContent = Math.round(monthly).toLocaleString('ru-RU') + ' ₽';
+    }
     hoursValue.textContent = hours;
     daysValue.textContent = days;
   }
