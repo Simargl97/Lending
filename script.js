@@ -259,4 +259,5 @@ function initReviews() {
   });
 }
 
+
 document.addEventListener('DOMContentLoaded', initReviews);
