@@ -211,19 +211,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function openModal(e){
     e && e.preventDefault();
+    if (!modal) return;
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
   }
   function closeModal(){
+    if (!modal) return;
     modal.setAttribute('aria-hidden','true');
     document.body.style.overflow = '';
   }
   openBtns.forEach(b=> b && b.addEventListener('click', openModal));
   closeBtn && closeBtn.addEventListener('click', closeModal);
   cancelBtn && cancelBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', function(e){
-    if(e.target === modal) closeModal();
-  });
+  if (modal) {
+    modal.addEventListener('click', function(e){
+      if(e.target === modal) closeModal();
+    });
+  }
 
   // Simple form handling (local demo)
   const form = document.getElementById('applyForm');
