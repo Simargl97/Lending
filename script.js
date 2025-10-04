@@ -456,6 +456,10 @@ function initCalculator() {
       citySelect.value = cityName;
       updateIncome();
       updateCalcHint();
+      const calcSection = document.getElementById('calc');
+      if (calcSection) {
+        calcSection.scrollIntoView({ behavior: 'smooth' });
+      }
       if (citySearch) {
         citySearch.value = cityName;
       }
