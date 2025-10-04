@@ -117,6 +117,12 @@
 
     <div class="calc-grid">
       <div class="calc-controls">
+        <label class="calc-label" for="citySearch">
+          Поиск города:
+          <input type="search" id="citySearch" placeholder="Начните вводить город" autocomplete="off" aria-describedby="cityHelp" list="cityOptions">
+        </label>
+        <p id="cityHelp" class="calc-note calc-note--inline">Можно вводить название — мы подсветим подходящий город.</p>
+        <datalist id="cityOptions"></datalist>
         <label class="calc-label">
           Город:
           <select id="citySelect" aria-label="Город"></select>
@@ -328,85 +334,158 @@
     <h2 class="section-title">Работа курьером доступна в городах</h2>
     <p class="lead">Выбирайте удобный для вас населённый пункт — подключение доступно во многих регионах России.</p>
     <div class="cities-grid" role="list">
-      <span class="city" role="listitem">Москва</span>
-      <span class="city" role="listitem">Санкт-Петербург</span>
-      <span class="city" role="listitem">Екатеринбург</span>
-      <span class="city" role="listitem">Новосибирск</span>
-      <span class="city" role="listitem">Казань</span>
-      <span class="city" role="listitem">Нижний Новгород</span>
-      <span class="city" role="listitem">Самара</span>
-      <span class="city" role="listitem">Уфа</span>
-      <span class="city" role="listitem">Красноярск</span>
-      <span class="city" role="listitem">Челябинск</span>
-      <span class="city" role="listitem">Омск</span>
-      <span class="city" role="listitem">Ростов-на-Дону</span>
-      <span class="city" role="listitem">Воронеж</span>
-      <span class="city" role="listitem">Пермь</span>
-      <span class="city" role="listitem">Волгоград</span>
-      <span class="city" role="listitem">Краснодар</span>
-      <span class="city" role="listitem">Саратов</span>
-      <span class="city" role="listitem">Тюмень</span>
-      <span class="city" role="listitem">Тольятти</span>
-      <span class="city" role="listitem">Ижевск</span>
-      <span class="city" role="listitem">Барнаул</span>
-      <span class="city" role="listitem">Ульяновск</span>
-      <span class="city" role="listitem">Иркутск</span>
-      <span class="city" role="listitem">Хабаровск</span>
-      <span class="city" role="listitem">Ярославль</span>
-      <span class="city" role="listitem">Владивосток</span>
-      <span class="city" role="listitem">Махачкала</span>
-      <span class="city" role="listitem">Томск</span>
-      <span class="city" role="listitem">Оренбург</span>
-      <span class="city" role="listitem">Кемерово</span>
-      <span class="city" role="listitem">Новокузнецк</span>
-      <span class="city" role="listitem">Рязань</span>
-      <span class="city" role="listitem">Астрахань</span>
-      <span class="city" role="listitem">Пенза</span>
-      <span class="city" role="listitem">Липецк</span>
-      <span class="city" role="listitem">Киров</span>
-      <span class="city" role="listitem">Чебоксары</span>
-      <span class="city" role="listitem">Тверь</span>
-      <span class="city" role="listitem">Калуга</span>
-      <span class="city" role="listitem">Белгород</span>
-      <span class="city" role="listitem">Сочи</span>
-      <span class="city" role="listitem">Ставрополь</span>
-      <span class="city" role="listitem">Тула</span>
-      <span class="city" role="listitem">Брянск</span>
-      <span class="city" role="listitem">Курск</span>
-      <span class="city" role="listitem">Архангельск</span>
-      <span class="city" role="listitem">Мурманск</span>
-      <span class="city" role="listitem">Псков</span>
-      <span class="city" role="listitem">Смоленск</span>
-      <span class="city" role="listitem">Вологда</span>
-      <span class="city" role="listitem">Калининград</span>
-      <span class="city" role="listitem">Кострома</span>
-      <span class="city" role="listitem">Иваново</span>
-      <span class="city" role="listitem">Якутск</span>
-      <span class="city" role="listitem">Сургут</span>
-      <span class="city" role="listitem">Набережные Челны</span>
-      <span class="city" role="listitem">Череповец</span>
-      <span class="city" role="listitem">Комсомольск-на-Амуре</span>
-      <span class="city" role="listitem">Березники</span>
-      <span class="city" role="listitem">Подольск</span>
-      <span class="city" role="listitem">Мытищи</span>
-      <span class="city" role="listitem">Химки</span>
-      <span class="city" role="listitem">Люберцы</span>
-      <span class="city" role="listitem">Королёв</span>
-      <span class="city" role="listitem">Домодедово</span>
-      <span class="city" role="listitem">Жуковский</span>
-      <span class="city" role="listitem">Пушкино</span>
-      <span class="city" role="listitem">Электросталь</span>
-      <span class="city" role="listitem">Балашиха</span>
-      <span class="city" role="listitem">Реутов</span>
-      <span class="city" role="listitem">Долгопрудный</span>
-      <span class="city" role="listitem">Коломна</span>
-      <span class="city" role="listitem">Серпухов</span>
-      <span class="city" role="listitem">Железнодорожный</span>
-      <span class="city" role="listitem">Клин</span>
-      <span class="city" role="listitem">Одинцово</span>
-      <span class="city" role="listitem">Дмитров</span>
-      <span class="city" role="listitem">Зеленоград</span>
-      <span class="city" role="listitem">Щёлково</span>
+      <span class="city" role="listitem" data-city-name="Абакан">Абакан</span>
+      <span class="city" role="listitem" data-city-name="Адлер">Адлер</span>
+      <span class="city" role="listitem" data-city-name="Альметьевск">Альметьевск</span>
+      <span class="city" role="listitem" data-city-name="Анапа">Анапа</span>
+      <span class="city" role="listitem" data-city-name="Апрелевка">Апрелевка</span>
+      <span class="city" role="listitem" data-city-name="Армавир">Армавир</span>
+      <span class="city" role="listitem" data-city-name="Архангельск">Архангельск</span>
+      <span class="city" role="listitem" data-city-name="Астрахань">Астрахань</span>
+      <span class="city" role="listitem" data-city-name="Балаково">Балаково</span>
+      <span class="city" role="listitem" data-city-name="Балашиха">Балашиха</span>
+      <span class="city" role="listitem" data-city-name="Барнаул">Барнаул</span>
+      <span class="city" role="listitem" data-city-name="Батайск">Батайск</span>
+      <span class="city" role="listitem" data-city-name="Белгород">Белгород</span>
+      <span class="city" role="listitem" data-city-name="Бердск">Бердск</span>
+      <span class="city" role="listitem" data-city-name="Благовещенск">Благовещенск</span>
+      <span class="city" role="listitem" data-city-name="Бронницы">Бронницы</span>
+      <span class="city" role="listitem" data-city-name="Брянск">Брянск</span>
+      <span class="city" role="listitem" data-city-name="Великий Новгород">Великий Новгород</span>
+      <span class="city" role="listitem" data-city-name="Видное">Видное</span>
+      <span class="city" role="listitem" data-city-name="Владивосток">Владивосток</span>
+      <span class="city" role="listitem" data-city-name="Владикавказ">Владикавказ</span>
+      <span class="city" role="listitem" data-city-name="Владимир">Владимир</span>
+      <span class="city" role="listitem" data-city-name="Волгоград">Волгоград</span>
+      <span class="city" role="listitem" data-city-name="Волжский">Волжский</span>
+      <span class="city" role="listitem" data-city-name="Вологда">Вологда</span>
+      <span class="city" role="listitem" data-city-name="Воронеж">Воронеж</span>
+      <span class="city" role="listitem" data-city-name="Воскресенск">Воскресенск</span>
+      <span class="city" role="listitem" data-city-name="Всеволжск">Всеволжск</span>
+      <span class="city" role="listitem" data-city-name="Выборг">Выборг</span>
+      <span class="city" role="listitem" data-city-name="Гатчина">Гатчина</span>
+      <span class="city" role="listitem" data-city-name="Геленджик">Геленджик</span>
+      <span class="city" role="listitem" data-city-name="Дзержинск">Дзержинск</span>
+      <span class="city" role="listitem" data-city-name="Дзержинский">Дзержинский</span>
+      <span class="city" role="listitem" data-city-name="Дмитров">Дмитров</span>
+      <span class="city" role="listitem" data-city-name="Долгопрудный">Долгопрудный</span>
+      <span class="city" role="listitem" data-city-name="Домодедово">Домодедово</span>
+      <span class="city" role="listitem" data-city-name="Дубна">Дубна</span>
+      <span class="city" role="listitem" data-city-name="Егорьевск">Егорьевск</span>
+      <span class="city" role="listitem" data-city-name="Екатеринбург">Екатеринбург</span>
+      <span class="city" role="listitem" data-city-name="Елабуга">Елабуга</span>
+      <span class="city" role="listitem" data-city-name="Ессентуки">Ессентуки</span>
+      <span class="city" role="listitem" data-city-name="Железнодорожный">Железнодорожный</span>
+      <span class="city" role="listitem" data-city-name="Звенигород">Звенигород</span>
+      <span class="city" role="listitem" data-city-name="Зеленоград">Зеленоград</span>
+      <span class="city" role="listitem" data-city-name="Иваново">Иваново</span>
+      <span class="city" role="listitem" data-city-name="Ивантеевка">Ивантеевка</span>
+      <span class="city" role="listitem" data-city-name="Ижевск">Ижевск</span>
+      <span class="city" role="listitem" data-city-name="Иркутск">Иркутск</span>
+      <span class="city" role="listitem" data-city-name="Йошкар-Ола">Йошкар-Ола</span>
+      <span class="city" role="listitem" data-city-name="Казань">Казань</span>
+      <span class="city" role="listitem" data-city-name="Калининград">Калининград</span>
+      <span class="city" role="listitem" data-city-name="Калуга">Калуга</span>
+      <span class="city" role="listitem" data-city-name="Кемерово">Кемерово</span>
+      <span class="city" role="listitem" data-city-name="Кингисепп">Кингисепп</span>
+      <span class="city" role="listitem" data-city-name="Киров">Киров</span>
+      <span class="city" role="listitem" data-city-name="Кисловодск">Кисловодск</span>
+      <span class="city" role="listitem" data-city-name="Клин">Клин</span>
+      <span class="city" role="listitem" data-city-name="Ковров">Ковров</span>
+      <span class="city" role="listitem" data-city-name="Коломна">Коломна</span>
+      <span class="city" role="listitem" data-city-name="Колпино">Колпино</span>
+      <span class="city" role="listitem" data-city-name="Королёв">Королёв</span>
+      <span class="city" role="listitem" data-city-name="Кострома">Кострома</span>
+      <span class="city" role="listitem" data-city-name="Котельники">Котельники</span>
+      <span class="city" role="listitem" data-city-name="Красногорск">Красногорск</span>
+      <span class="city" role="listitem" data-city-name="Краснодар">Краснодар</span>
+      <span class="city" role="listitem" data-city-name="Красноярск">Красноярск</span>
+      <span class="city" role="listitem" data-city-name="Курган">Курган</span>
+      <span class="city" role="listitem" data-city-name="Курск">Курск</span>
+      <span class="city" role="listitem" data-city-name="Лобня">Лобня</span>
+      <span class="city" role="listitem" data-city-name="Лыткарино">Лыткарино</span>
+      <span class="city" role="listitem" data-city-name="Люберцы">Люберцы</span>
+      <span class="city" role="listitem" data-city-name="Магнитогорск">Магнитогорск</span>
+      <span class="city" role="listitem" data-city-name="Майкоп">Майкоп</span>
+      <span class="city" role="listitem" data-city-name="Махачкала">Махачкала</span>
+      <span class="city" role="listitem" data-city-name="Москва">Москва</span>
+      <span class="city" role="listitem" data-city-name="Мурманск">Мурманск</span>
+      <span class="city" role="listitem" data-city-name="Мытищи">Мытищи</span>
+      <span class="city" role="listitem" data-city-name="Набережные Челны">Набережные Челны</span>
+      <span class="city" role="listitem" data-city-name="Нальчик">Нальчик</span>
+      <span class="city" role="listitem" data-city-name="Наро-Фоминск">Наро-Фоминск</span>
+      <span class="city" role="listitem" data-city-name="Нефтекамск">Нефтекамск</span>
+      <span class="city" role="listitem" data-city-name="Нижневартовск">Нижневартовск</span>
+      <span class="city" role="listitem" data-city-name="Нижнекамск">Нижнекамск</span>
+      <span class="city" role="listitem" data-city-name="Нижний Новгород">Нижний Новгород</span>
+      <span class="city" role="listitem" data-city-name="Нижний Тагил">Нижний Тагил</span>
+      <span class="city" role="listitem" data-city-name="Новокузнецк">Новокузнецк</span>
+      <span class="city" role="listitem" data-city-name="Новомосковск">Новомосковск</span>
+      <span class="city" role="listitem" data-city-name="Новороссийск">Новороссийск</span>
+      <span class="city" role="listitem" data-city-name="Новосибирск">Новосибирск</span>
+      <span class="city" role="listitem" data-city-name="Новочеркасск">Новочеркасск</span>
+      <span class="city" role="listitem" data-city-name="Новый Уренгой">Новый Уренгой</span>
+      <span class="city" role="listitem" data-city-name="Ногинск">Ногинск</span>
+      <span class="city" role="listitem" data-city-name="Обнинск">Обнинск</span>
+      <span class="city" role="listitem" data-city-name="Одинцово">Одинцово</span>
+      <span class="city" role="listitem" data-city-name="Омск">Омск</span>
+      <span class="city" role="listitem" data-city-name="Оренбург">Оренбург</span>
+      <span class="city" role="listitem" data-city-name="Орехово-Зуево">Орехово-Зуево</span>
+      <span class="city" role="listitem" data-city-name="Орёл">Орёл</span>
+      <span class="city" role="listitem" data-city-name="Павловский Посад">Павловский Посад</span>
+      <span class="city" role="listitem" data-city-name="Пенза">Пенза</span>
+      <span class="city" role="listitem" data-city-name="Пермь">Пермь</span>
+      <span class="city" role="listitem" data-city-name="Петрозаводск">Петрозаводск</span>
+      <span class="city" role="listitem" data-city-name="Подольск">Подольск</span>
+      <span class="city" role="listitem" data-city-name="Псков">Псков</span>
+      <span class="city" role="listitem" data-city-name="Пушкин">Пушкин</span>
+      <span class="city" role="listitem" data-city-name="Пушкино">Пушкино</span>
+      <span class="city" role="listitem" data-city-name="Пятигорск">Пятигорск</span>
+      <span class="city" role="listitem" data-city-name="Раменское">Раменское</span>
+      <span class="city" role="listitem" data-city-name="Реутов">Реутов</span>
+      <span class="city" role="listitem" data-city-name="Ростов-на-Дону">Ростов-на-Дону</span>
+      <span class="city" role="listitem" data-city-name="Рязань">Рязань</span>
+      <span class="city" role="listitem" data-city-name="Самара">Самара</span>
+      <span class="city" role="listitem" data-city-name="Санкт-Петербург (СПБ)">Санкт-Петербург (СПБ)</span>
+      <span class="city" role="listitem" data-city-name="Саранск">Саранск</span>
+      <span class="city" role="listitem" data-city-name="Саратов">Саратов</span>
+      <span class="city" role="listitem" data-city-name="Северодвинск">Северодвинск</span>
+      <span class="city" role="listitem" data-city-name="Сергиев Посад">Сергиев Посад</span>
+      <span class="city" role="listitem" data-city-name="Серпухов">Серпухов</span>
+      <span class="city" role="listitem" data-city-name="Смоленск">Смоленск</span>
+      <span class="city" role="listitem" data-city-name="Солнечногорск">Солнечногорск</span>
+      <span class="city" role="listitem" data-city-name="Сочи">Сочи</span>
+      <span class="city" role="listitem" data-city-name="Ставрополь">Ставрополь</span>
+      <span class="city" role="listitem" data-city-name="Старый Оскол">Старый Оскол</span>
+      <span class="city" role="listitem" data-city-name="Стерлитамак">Стерлитамак</span>
+      <span class="city" role="listitem" data-city-name="Ступино">Ступино</span>
+      <span class="city" role="listitem" data-city-name="Сургут">Сургут</span>
+      <span class="city" role="listitem" data-city-name="Сыктывкар">Сыктывкар</span>
+      <span class="city" role="listitem" data-city-name="Таганрог">Таганрог</span>
+      <span class="city" role="listitem" data-city-name="Тамбов">Тамбов</span>
+      <span class="city" role="listitem" data-city-name="Тверь">Тверь</span>
+      <span class="city" role="listitem" data-city-name="Тобольск">Тобольск</span>
+      <span class="city" role="listitem" data-city-name="Тольятти">Тольятти</span>
+      <span class="city" role="listitem" data-city-name="Томск">Томск</span>
+      <span class="city" role="listitem" data-city-name="Троицк">Троицк</span>
+      <span class="city" role="listitem" data-city-name="Тула">Тула</span>
+      <span class="city" role="listitem" data-city-name="Тюмень">Тюмень</span>
+      <span class="city" role="listitem" data-city-name="Ульяновск">Ульяновск</span>
+      <span class="city" role="listitem" data-city-name="Уссурийск">Уссурийск</span>
+      <span class="city" role="listitem" data-city-name="Уфа">Уфа</span>
+      <span class="city" role="listitem" data-city-name="Фрязино">Фрязино</span>
+      <span class="city" role="listitem" data-city-name="Хабаровск">Хабаровск</span>
+      <span class="city" role="listitem" data-city-name="Ханты-Мансийск">Ханты-Мансийск</span>
+      <span class="city" role="listitem" data-city-name="Химки">Химки</span>
+      <span class="city" role="listitem" data-city-name="Чебоксары">Чебоксары</span>
+      <span class="city" role="listitem" data-city-name="Челябинск">Челябинск</span>
+      <span class="city" role="listitem" data-city-name="Череповец">Череповец</span>
+      <span class="city" role="listitem" data-city-name="Чехов">Чехов</span>
+      <span class="city" role="listitem" data-city-name="Шахты">Шахты</span>
+      <span class="city" role="listitem" data-city-name="Щербинка">Щербинка</span>
+      <span class="city" role="listitem" data-city-name="Щёлково">Щёлково</span>
+      <span class="city" role="listitem" data-city-name="Электросталь">Электросталь</span>
+      <span class="city" role="listitem" data-city-name="Ярославль">Ярославль</span>
     </div>
   </div>
 </section>

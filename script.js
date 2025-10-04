@@ -7,24 +7,199 @@ const MODE_OPTIONS = [
   { key: 'auto', label: 'Авто', hourlyRate: 550 }
 ];
 
-const CITY_DATA = [
-  { name: 'Москва', multiplier: 1.2 },
-  { name: 'Санкт‑Петербург', multiplier: 1.15 },
-  { name: 'Екатеринбург', multiplier: 1.1 },
-  { name: 'Новосибирск', multiplier: 1.05 },
-  { name: 'Казань', multiplier: 1.05 },
-  { name: 'Краснодар', multiplier: 1.05 },
-  { name: 'Нижний Новгород', multiplier: 1.0 },
-  { name: 'Ростов-на-Дону', multiplier: 1.0 },
-  { name: 'Самара', multiplier: 1.0 },
-  { name: 'Уфа', multiplier: 0.95 },
-  { name: 'Пермь', multiplier: 0.95 },
-  { name: 'Воронеж', multiplier: 0.95 },
-  { name: 'Челябинск', multiplier: 0.95 },
-  { name: 'Красноярск', multiplier: 0.9 },
-  { name: 'Омск', multiplier: 0.9 },
-  { name: 'Саратов', multiplier: 0.9 }
+const DEFAULT_CITY_MULTIPLIER = 0.95;
+const CITY_MULTIPLIERS = {
+  'Москва': 1.2,
+  'Санкт-Петербург (СПБ)': 1.15,
+  'Екатеринбург': 1.1,
+  'Новосибирск': 1.05,
+  'Казань': 1.05,
+  'Краснодар': 1.05,
+  'Нижний Новгород': 1.0,
+  'Ростов-на-Дону': 1.0,
+  'Самара': 1.0,
+  'Сочи': 1.0,
+  'Нижневартовск': 1.0,
+  'Сургут': 1.02,
+  'Ханты-Мансийск': 1.02,
+  'Новый Уренгой': 1.02,
+  'Калининград': 0.98,
+  'Красноярск': 0.98,
+  'Тюмень': 0.98,
+  'Мурманск': 0.97,
+  'Тольятти': 0.96,
+  'Уфа': 0.95,
+  'Пермь': 0.95,
+  'Воронеж': 0.95,
+  'Челябинск': 0.95,
+  'Волгоград': 0.95,
+  'Ярославль': 0.95,
+  'Омск': 0.93,
+  'Саратов': 0.93,
+  'Магнитогорск': 0.94
+};
+
+const CITY_NAMES = [
+  'Абакан',
+  'Адлер',
+  'Альметьевск',
+  'Анапа',
+  'Апрелевка',
+  'Армавир',
+  'Архангельск',
+  'Астрахань',
+  'Балаково',
+  'Балашиха',
+  'Барнаул',
+  'Батайск',
+  'Белгород',
+  'Бердск',
+  'Благовещенск',
+  'Бронницы',
+  'Брянск',
+  'Великий Новгород',
+  'Видное',
+  'Владивосток',
+  'Владикавказ',
+  'Владимир',
+  'Волгоград',
+  'Волжский',
+  'Вологда',
+  'Воронеж',
+  'Воскресенск',
+  'Всеволжск',
+  'Выборг',
+  'Гатчина',
+  'Геленджик',
+  'Дзержинск',
+  'Дзержинский',
+  'Дмитров',
+  'Долгопрудный',
+  'Домодедово',
+  'Дубна',
+  'Егорьевск',
+  'Екатеринбург',
+  'Елабуга',
+  'Ессентуки',
+  'Железнодорожный',
+  'Звенигород',
+  'Зеленоград',
+  'Иваново',
+  'Ивантеевка',
+  'Ижевск',
+  'Иркутск',
+  'Йошкар-Ола',
+  'Казань',
+  'Калининград',
+  'Калуга',
+  'Кемерово',
+  'Кингисепп',
+  'Киров',
+  'Кисловодск',
+  'Клин',
+  'Ковров',
+  'Коломна',
+  'Колпино',
+  'Королёв',
+  'Кострома',
+  'Котельники',
+  'Красногорск',
+  'Краснодар',
+  'Красноярск',
+  'Курган',
+  'Курск',
+  'Лобня',
+  'Лыткарино',
+  'Люберцы',
+  'Магнитогорск',
+  'Майкоп',
+  'Махачкала',
+  'Москва',
+  'Мурманск',
+  'Мытищи',
+  'Набережные Челны',
+  'Нальчик',
+  'Наро-Фоминск',
+  'Нефтекамск',
+  'Нижневартовск',
+  'Нижнекамск',
+  'Нижний Новгород',
+  'Нижний Тагил',
+  'Новокузнецк',
+  'Новомосковск',
+  'Новороссийск',
+  'Новосибирск',
+  'Новочеркасск',
+  'Новый Уренгой',
+  'Ногинск',
+  'Обнинск',
+  'Одинцово',
+  'Омск',
+  'Оренбург',
+  'Орехово-Зуево',
+  'Орёл',
+  'Павловский Посад',
+  'Пенза',
+  'Пермь',
+  'Петрозаводск',
+  'Подольск',
+  'Псков',
+  'Пушкин',
+  'Пушкино',
+  'Пятигорск',
+  'Раменское',
+  'Реутов',
+  'Ростов-на-Дону',
+  'Рязань',
+  'Самара',
+  'Санкт-Петербург (СПБ)',
+  'Саранск',
+  'Саратов',
+  'Северодвинск',
+  'Сергиев Посад',
+  'Серпухов',
+  'Смоленск',
+  'Солнечногорск',
+  'Сочи',
+  'Ставрополь',
+  'Старый Оскол',
+  'Стерлитамак',
+  'Ступино',
+  'Сургут',
+  'Сыктывкар',
+  'Таганрог',
+  'Тамбов',
+  'Тверь',
+  'Тобольск',
+  'Тольятти',
+  'Томск',
+  'Троицк',
+  'Тула',
+  'Тюмень',
+  'Ульяновск',
+  'Уссурийск',
+  'Уфа',
+  'Фрязино',
+  'Хабаровск',
+  'Ханты-Мансийск',
+  'Химки',
+  'Чебоксары',
+  'Челябинск',
+  'Череповец',
+  'Чехов',
+  'Шахты',
+  'Щербинка',
+  'Щёлково',
+  'Электросталь',
+  'Ярославль'
 ];
+
+const CITY_DATA = CITY_NAMES.map(name => ({
+  name,
+  multiplier: CITY_MULTIPLIERS[name] ?? DEFAULT_CITY_MULTIPLIER
+}));
+
+const DEFAULT_CITY_NAME = 'Москва';
 
 // script.js — минимальная логика: модал формы, анимация появления и отправка формы (локально)
 document.addEventListener('DOMContentLoaded', function () {
@@ -91,22 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', showOnScroll);
 });
 
-// ===== Build city tags dynamically from CITY_DATA
-(function buildCityTags(){
-  const tags = document.getElementById('citiesTags');
-  if(!tags) return;
-  tags.innerHTML = '';
-  CITY_DATA.forEach((c, idx) => {
-    const b = document.createElement('button');
-    b.className = 'city-tag';
-    b.setAttribute('role','listitem');
-    b.setAttribute('data-city', c.name);
-    b.textContent = c.name;
-    if(idx < 18) b.classList.add('highlight'); // визуальный приоритет крупнейшим
-    tags.appendChild(b);
-  });
-})();
-
 // ===== calc tips
 const MODE_TIPS = {
   walk: 'Пеший курьер — удобнее в центре и рядом с метро. Ставьте короткие слоты в час-пик.',
@@ -131,6 +290,25 @@ document.addEventListener('input', (e)=>{
 });
 document.addEventListener('DOMContentLoaded', updateCalcHint);
 
+function normalizeCityString(value) {
+  return (value || '')
+    .toLowerCase()
+    .replace(/ё/g, 'е')
+    .replace(/[^a-zа-я0-9]/gi, '');
+}
+
+function highlightCityInList(cityName) {
+  const items = document.querySelectorAll('[data-city-name]');
+  if (!items.length) return;
+  items.forEach(item => {
+    if (cityName && item.dataset.cityName === cityName) {
+      item.classList.add('is-active');
+    } else {
+      item.classList.remove('is-active');
+    }
+  });
+}
+
 /**
  * Populate select options for city and mode, and set up event listeners
  */
@@ -144,8 +322,16 @@ function initCalculator() {
   const dayIncome = document.getElementById('dayIncome');
   const weekIncome = document.getElementById('weekIncome');
   const monthIncome = document.getElementById('monthIncome');
+  const citySearch = document.getElementById('citySearch');
+  const cityDatalist = document.getElementById('cityOptions');
+  const cityGrid = document.querySelector('.cities-grid');
 
   if (!citySelect || !modeSelect) return;
+
+  citySelect.innerHTML = '';
+  if (cityDatalist) {
+    cityDatalist.innerHTML = '';
+  }
 
   // Populate city options
   CITY_DATA.forEach(city => {
@@ -153,8 +339,17 @@ function initCalculator() {
     opt.value = city.name;
     opt.textContent = city.name;
     citySelect.appendChild(opt);
+    if (cityDatalist) {
+      const option = document.createElement('option');
+      option.value = city.name;
+      cityDatalist.appendChild(option);
+    }
   });
-  citySelect.selectedIndex = 0;
+
+  const fallbackCity = CITY_DATA.find(c => c.name === DEFAULT_CITY_NAME) || CITY_DATA[0];
+  if (fallbackCity) {
+    citySelect.value = fallbackCity.name;
+  }
 
   // Populate mode options
   MODE_OPTIONS.forEach(optData => {
@@ -208,13 +403,64 @@ function initCalculator() {
     }
     hoursValue.textContent = hours;
     daysValue.textContent = days;
+    if (city) {
+      highlightCityInList(city.name);
+    } else {
+      highlightCityInList(null);
+    }
+    if (citySearch && city && document.activeElement !== citySearch) {
+      citySearch.value = city.name;
+    }
   }
 
   // Listen to changes
-  citySelect.addEventListener('change', () => { updateIncome(); updateCalcHint(); });
+  citySelect.addEventListener('change', () => {
+    updateIncome();
+    updateCalcHint();
+    if (citySearch && document.activeElement !== citySearch) {
+      citySearch.value = citySelect.value;
+    }
+  });
   modeSelect.addEventListener('change', () => { updateActiveModeIcon(); updateIncome(); updateCalcHint(); });
   hoursRange.addEventListener('input', updateIncome);
   daysRange.addEventListener('input', updateIncome);
+
+  if (citySearch) {
+    citySearch.addEventListener('input', () => {
+      const normalizedQuery = normalizeCityString(citySearch.value);
+      if (!normalizedQuery) {
+        if (fallbackCity) {
+          citySelect.value = fallbackCity.name;
+          updateIncome();
+          updateCalcHint();
+        }
+        return;
+      }
+      const match = CITY_DATA.find(city => normalizeCityString(city.name).includes(normalizedQuery));
+      if (match) {
+        citySelect.value = match.name;
+        updateIncome();
+        updateCalcHint();
+      } else {
+        highlightCityInList(null);
+      }
+    });
+  }
+
+  if (cityGrid) {
+    cityGrid.addEventListener('click', (event) => {
+      const target = event.target.closest('[data-city-name]');
+      if (!target) return;
+      const cityName = target.dataset.cityName;
+      if (!cityName) return;
+      citySelect.value = cityName;
+      updateIncome();
+      updateCalcHint();
+      if (citySearch) {
+        citySearch.value = cityName;
+      }
+    });
+  }
 
   // Initialize
   updateActiveModeIcon();
