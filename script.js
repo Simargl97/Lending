@@ -1,3 +1,31 @@
+// === Data for calculator (approximate rates and city multipliers)
+const MODE_OPTIONS = [
+  { key: 'walk', label: 'Пешком', hourlyRate: 250 },
+  { key: 'bike', label: 'Велосипед', hourlyRate: 400 },
+  { key: 'ebike', label: 'Электровело', hourlyRate: 450 },
+  { key: 'moto', label: 'Мото', hourlyRate: 500 },
+  { key: 'auto', label: 'Авто', hourlyRate: 550 }
+];
+
+const CITY_DATA = [
+  { name: 'Москва', multiplier: 1.2 },
+  { name: 'Санкт‑Петербург', multiplier: 1.15 },
+  { name: 'Екатеринбург', multiplier: 1.1 },
+  { name: 'Новосибирск', multiplier: 1.05 },
+  { name: 'Казань', multiplier: 1.05 },
+  { name: 'Краснодар', multiplier: 1.05 },
+  { name: 'Нижний Новгород', multiplier: 1.0 },
+  { name: 'Ростов-на-Дону', multiplier: 1.0 },
+  { name: 'Самара', multiplier: 1.0 },
+  { name: 'Уфа', multiplier: 0.95 },
+  { name: 'Пермь', multiplier: 0.95 },
+  { name: 'Воронеж', multiplier: 0.95 },
+  { name: 'Челябинск', multiplier: 0.95 },
+  { name: 'Красноярск', multiplier: 0.9 },
+  { name: 'Омск', multiplier: 0.9 },
+  { name: 'Саратов', multiplier: 0.9 }
+];
+
 // script.js — минимальная логика: модал формы, анимация появления и отправка формы (локально)
 document.addEventListener('DOMContentLoaded', function () {
   // Modal open/close
@@ -102,33 +130,6 @@ document.addEventListener('input', (e)=>{
   }
 });
 document.addEventListener('DOMContentLoaded', updateCalcHint);
-
-// === Data for calculator (approximate rates and city multipliers)
-const MODE_OPTIONS = [
-  { key: 'walk', label: 'Пешком', hourlyRate: 250 },
-  { key: 'bike', label: 'Велосипед', hourlyRate: 400 },
-  { key: 'ebike', label: 'Электровело', hourlyRate: 450 },
-  { key: 'moto', label: 'Мото', hourlyRate: 500 },
-  { key: 'auto', label: 'Авто', hourlyRate: 550 }
-];
-const CITY_DATA = [
-  { name: 'Москва', multiplier: 1.2 },
-  { name: 'Санкт‑Петербург', multiplier: 1.15 },
-  { name: 'Екатеринбург', multiplier: 1.1 },
-  { name: 'Новосибирск', multiplier: 1.05 },
-  { name: 'Казань', multiplier: 1.05 },
-  { name: 'Краснодар', multiplier: 1.05 },
-  { name: 'Нижний Новгород', multiplier: 1.0 },
-  { name: 'Ростов-на-Дону', multiplier: 1.0 },
-  { name: 'Самара', multiplier: 1.0 },
-  { name: 'Уфа', multiplier: 0.95 },
-  { name: 'Пермь', multiplier: 0.95 },
-  { name: 'Воронеж', multiplier: 0.95 },
-  { name: 'Челябинск', multiplier: 0.95 },
-  { name: 'Красноярск', multiplier: 0.9 },
-  { name: 'Омск', multiplier: 0.9 },
-  { name: 'Саратов', multiplier: 0.9 }
-];
 
 /**
  * Populate select options for city and mode, and set up event listeners
