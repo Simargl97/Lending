@@ -33,7 +33,7 @@ body{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0.62) 0%,rgba(0,0,0,0.4) 32%,rgba(255,255,255,0.88) 100%);
+  background:transparent;
   z-index:0;
 }
 .top-bg > *{position:relative;z-index:1}
