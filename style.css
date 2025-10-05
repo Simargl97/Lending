@@ -169,9 +169,16 @@ body{
 .product:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,0.12)}
 
 /* FOOTER */
-.footer{background:#0f0f0f;color:#fff;padding:18px 0;margin-top:36px}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.footer a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:14px}
+.footer{background:#0f0f0f;color:#fff;padding:32px 0;margin-top:36px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.footer-section{flex:1 1 220px;min-width:220px;font-size:14px;line-height:1.6}
+.footer-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;color:rgba(255,255,255,0.72)}
+.footer p{margin:0 0 8px;color:rgba(255,255,255,0.82)}
+.footer p:last-child{margin-bottom:0}
+.footer-note .footer-copy{margin-top:12px;font-weight:600;color:#fff}
+.footer a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:14px}
+.footer a:hover{text-decoration:underline;color:#fff}
+.footer-inner a[target="_blank"]::after{content:" ↗";font-size:12px}
 
 /* RESPONSIVE */
 @media (max-width:900px){
@@ -189,6 +196,9 @@ body{
   .quick-stats{flex-direction:column;align-items:flex-start}
   .steps-wrap{flex-direction:column}
   .market-cards{display:none}
+  .footer-section{min-width:100%}
+  .footer p,.footer a{font-size:13px;line-height:1.5}
+  .footer{padding:28px 0}
 }
 @media (max-width:420px){
   .hero-sub{font-size:16px}
