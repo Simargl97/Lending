@@ -24,10 +24,6 @@ body{
   line-height:1.45;
 }
 
-.top-bg{
-  background:url('images/background.png') center/cover no-repeat;
-}
-
 /* CONTAINER */
 .container{width:95%;max-width:var(--max-width);margin:0 auto}
 
@@ -65,7 +61,7 @@ body{
 .lead{max-width:920px;margin:0 auto 18px;font-size:17px;color:#1e1e1e;text-align:center}
 
 /* Cities */
-.section.cities{background:var(--muted)}
+.section.cities{background-color:var(--muted)}
 .cities-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:28px auto 0;max-width:var(--max-width)}
 .cities-grid .city{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;font-weight:600;color:#1f1f1f;text-align:center;display:flex;align-items:center;justify-content:center;transition:transform .2s ease,box-shadow .2s ease;font-size:15px;letter-spacing:.1px}
 .cities-grid .city:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,0.12)}
@@ -111,12 +107,16 @@ body{
 .faq-item:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,0.12)}
 
 /* CTA HERO */
-.cta-hero{position:relative;background:none;color:var(--white);text-align:center;padding:48px 0;border-radius:12px;overflow:hidden}
-.cta-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,0.45),rgba(0,0,0,0.2) 40%,rgba(0,0,0,0.65));pointer-events:none}
+.cta-hero{position:relative;background:var(--accent-gradient);color:#2b1b00;text-align:center;padding:48px 0;border-radius:12px;overflow:hidden}
+.cta-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.4),rgba(255,255,255,0));pointer-events:none}
 .cta-inner{max-width:820px;margin:0 auto;position:relative;z-index:1}
+.cta-hero .btn-outline{background:rgba(255,255,255,0.7);color:#1f1f1f;border:2px solid rgba(0,0,0,0.08)}
+.cta-hero .btn-outline:hover{border-color:rgba(0,0,0,0.18);background:rgba(255,255,255,0.85)}
 
-.top-bg .intro{color:var(--white);text-shadow:0 2px 12px rgba(0,0,0,0.4)}
-.top-bg .intro .lead{color:rgba(255,255,255,0.92)}
+/* Section backgrounds */
+.section-bg-1{background:linear-gradient(rgba(255,255,255,0.9),rgba(255,255,255,0.9)),url('images/background.png') center/cover no-repeat}
+.section-bg-2{background:linear-gradient(rgba(255,255,255,0.9),rgba(255,255,255,0.9)),url('images/background2.png') center/cover no-repeat}
+.section-bg-3{background:linear-gradient(rgba(255,255,255,0.92),rgba(255,255,255,0.92)),url('images/background3.png') center/cover no-repeat}
 
 /* PRODUCTS PAGE */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
