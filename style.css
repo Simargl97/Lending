@@ -133,6 +133,10 @@ body{
 .section-bg-2{background:linear-gradient(rgba(255,255,255,0.66),rgba(255,255,255,0.66)),url('images/background2.png') center/cover no-repeat}
 .section-bg-3{background:linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.7)),url('images/background3.png') center/cover no-repeat}
 
+.grouped-sections{
+  padding:0;
+}
+
 /* PRODUCTS PAGE */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
 .product{background:#fff;padding:16px;border-radius:12px;text-align:center;box-shadow:var(--shadow);transition:all .25s ease}

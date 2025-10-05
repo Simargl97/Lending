@@ -112,111 +112,111 @@
 
 <!-- ===== CALCULATOR (restored) ===== -->
   </div>
-<section class="section calc section-bg-2" id="calc" aria-labelledby="calc-title">
-  <div class="container">
-    <h2 class="section-title" id="calc-title">Калькулятор дохода</h2>
-    <p class="lead">Выберите город и способ доставки — покажем ориентировочный расчёт.</p>
+<div class="grouped-sections section-bg-2">
+  <section class="section calc" id="calc" aria-labelledby="calc-title">
+    <div class="container">
+      <h2 class="section-title" id="calc-title">Калькулятор дохода</h2>
+      <p class="lead">Выберите город и способ доставки — покажем ориентировочный расчёт.</p>
 
-    <div class="calc-grid">
-      <div class="calc-controls">
-        <label class="calc-label" for="citySearch">
-          Поиск города:
-          <input type="search" id="citySearch" placeholder="Начните вводить город" autocomplete="off" aria-describedby="cityHelp" list="cityOptions">
-        </label>
-        <p id="cityHelp" class="calc-note calc-note--inline">Можно вводить название — мы подсветим подходящий город.</p>
-        <datalist id="cityOptions"></datalist>
-        <label class="calc-label">
-          Город:
-          <select id="citySelect" aria-label="Город"></select>
-        </label>
-        <label class="calc-label">
-          Способ доставки:
-          <div class="mode-icons">
-            <img src="images/mode-walk.png" alt="Пеший">
-            <img src="images/mode-bike.png" alt="Велосипед">
-            <img src="images/mode-ebike.png" alt="Электровело">
-            <img src="images/mode-moto.png" alt="Мото">
-            <img src="images/mode-auto.png" alt="Авто">
-          </div>
-          <select id="modeSelect" aria-label="Способ доставки"></select>
-        </label>
-        <label class="calc-label">
-          Часов в день: <span id="hoursValue" class="calc-value">6</span>
-          <input type="range" id="hoursRange" min="2" max="12" value="6" step="1" aria-label="Часы в день">
-        </label>
-        <label class="calc-label">
-          Дней в неделю: <span id="daysValue" class="calc-value">5</span>
-          <input type="range" id="daysRange" min="1" max="7" value="5" step="1" aria-label="Дни в неделю">
-        </label>
-        <p class="calc-note">* Это примерный порядок цифр, он зависит от спроса, времени суток и бонусов.</p>
-        <p class="calc-hint" id="calcHint" aria-live="polite"></p>
-      </div>
-      <div class="calc-result" aria-live="polite">
-        <div class="result-card"><div>День</div><strong id="dayIncome">—</strong></div>
-        <div class="result-card"><div>Неделя</div><strong id="weekIncome">—</strong></div>
-        <div class="result-card"><div>Месяц ~</div><strong id="monthIncome">—</strong></div>
-        <a class="btn btn-primary btn-wide" data-role="apply-cta" href="https://ya.cc/t/-yGszGNW7iYQXz" target="_blank" rel="noopener">Стать курьером</a>
+      <div class="calc-grid">
+        <div class="calc-controls">
+          <label class="calc-label" for="citySearch">
+            Поиск города:
+            <input type="search" id="citySearch" placeholder="Начните вводить город" autocomplete="off" aria-describedby="cityHelp" list="cityOptions">
+          </label>
+          <p id="cityHelp" class="calc-note calc-note--inline">Можно вводить название — мы подсветим подходящий город.</p>
+          <datalist id="cityOptions"></datalist>
+          <label class="calc-label">
+            Город:
+            <select id="citySelect" aria-label="Город"></select>
+          </label>
+          <label class="calc-label">
+            Способ доставки:
+            <div class="mode-icons">
+              <img src="images/mode-walk.png" alt="Пеший">
+              <img src="images/mode-bike.png" alt="Велосипед">
+              <img src="images/mode-ebike.png" alt="Электровело">
+              <img src="images/mode-moto.png" alt="Мото">
+              <img src="images/mode-auto.png" alt="Авто">
+            </div>
+            <select id="modeSelect" aria-label="Способ доставки"></select>
+          </label>
+          <label class="calc-label">
+            Часов в день: <span id="hoursValue" class="calc-value">6</span>
+            <input type="range" id="hoursRange" min="2" max="12" value="6" step="1" aria-label="Часы в день">
+          </label>
+          <label class="calc-label">
+            Дней в неделю: <span id="daysValue" class="calc-value">5</span>
+            <input type="range" id="daysRange" min="1" max="7" value="5" step="1" aria-label="Дни в неделю">
+          </label>
+          <p class="calc-note">* Это примерный порядок цифр, он зависит от спроса, времени суток и бонусов.</p>
+          <p class="calc-hint" id="calcHint" aria-live="polite"></p>
+        </div>
+        <div class="calc-result" aria-live="polite">
+          <div class="result-card"><div>День</div><strong id="dayIncome">—</strong></div>
+          <div class="result-card"><div>Неделя</div><strong id="weekIncome">—</strong></div>
+          <div class="result-card"><div>Месяц ~</div><strong id="monthIncome">—</strong></div>
+          <a class="btn btn-primary btn-wide" data-role="apply-cta" href="https://ya.cc/t/-yGszGNW7iYQXz" target="_blank" rel="noopener">Стать курьером</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-</section>
+  </section>
 
 <!-- ===== FOR WHOM ===== -->
 
-<section class="section audience section-bg-2">
-  <div class="container">
-    <h2 class="section-title">Для кого эта работа</h2>
-    <div class="audience-grid">
-      <div class="aud-card">
-        <div class="aud-icon">🎓</div>
-        <h3>Студентам</h3>
-        <p>Свободный график позволяет совмещать учёбу и работу.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">👨‍👩‍👧</div>
-        <h3>Взрослым</h3>
-        <p>Стабильный доход и время для семьи. Выбирай удобные слоты.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">👴</div>
-        <h3>Пенсионерам</h3>
-        <p>Лёгкая подработка для активности и дополнительного дохода.</p>
-      </div>
-      <div class="aud-card">
-        <div class="aud-icon">🚴</div>
-        <h3>Подработка</h3>
-        <p>Заработок в свободное время, без привязки к офису.</p>
+  <section class="section audience">
+    <div class="container">
+      <h2 class="section-title">Для кого эта работа</h2>
+      <div class="audience-grid">
+        <div class="aud-card">
+          <div class="aud-icon">🎓</div>
+          <h3>Студентам</h3>
+          <p>Свободный график позволяет совмещать учёбу и работу.</p>
+        </div>
+        <div class="aud-card">
+          <div class="aud-icon">👨‍👩‍👧</div>
+          <h3>Взрослым</h3>
+          <p>Стабильный доход и время для семьи. Выбирай удобные слоты.</p>
+        </div>
+        <div class="aud-card">
+          <div class="aud-icon">👴</div>
+          <h3>Пенсионерам</h3>
+          <p>Лёгкая подработка для активности и дополнительного дохода.</p>
+        </div>
+        <div class="aud-card">
+          <div class="aud-icon">🚴</div>
+          <h3>Подработка</h3>
+          <p>Заработок в свободное время, без привязки к офису.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- ===== STEPS ===== -->
-<section class="section steps section-bg-2" id="steps">
-  <div class="container">
-    <h2 class="section-title">Как быстро начать</h2>
-    <div class="steps-wrap">
-      <div class="step">
-        <div class="num">1</div>
-        <h4>Заполни анкету и пройди регистрацию</h4>
-        <p>Быстрое оформление — кнопка ниже ведёт на анкету Яндекс.Еды.</p>
-        <a class="btn btn-primary" href="https://ya.cc/t/-yGszGNW7iYQXz" target="_blank">Заполнить анкету</a>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <h4>Получение экипировки</h4>
-        <p>В центре или ПВЗ Яндекс.Маркета получаешь экипировку и советы.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <h4>Выход на доставки</h4>
-        <p>Принимаешь первый заказ и зарабатываешь уже сегодня.</p>
+  <section class="section steps" id="steps">
+    <div class="container">
+      <h2 class="section-title">Как быстро начать</h2>
+      <div class="steps-wrap">
+        <div class="step">
+          <div class="num">1</div>
+          <h4>Заполни анкету и пройди регистрацию</h4>
+          <p>Быстрое оформление — кнопка ниже ведёт на анкету Яндекс.Еды.</p>
+          <a class="btn btn-primary" href="https://ya.cc/t/-yGszGNW7iYQXz" target="_blank">Заполнить анкету</a>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h4>Получение экипировки</h4>
+          <p>В центре или ПВЗ Яндекс.Маркета получаешь экипировку и советы.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h4>Выход на доставки</h4>
+          <p>Принимаешь первый заказ и зарабатываешь уже сегодня.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 
 
