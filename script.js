@@ -209,6 +209,58 @@ document.addEventListener('DOMContentLoaded', function () {
   const closeBtn = document.getElementById('modalClose');
   const cancelBtn = document.getElementById('modalCancel');
 
+  // FAQ accordion
+  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+  const closeFaqItem = (item) => {
+    const trigger = item.querySelector('.faq-trigger');
+    const answer = item.querySelector('.faq-a');
+    item.classList.remove('open');
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+    if (answer) {
+      answer.setAttribute('aria-hidden', 'true');
+    }
+  };
+
+  const openFaqItem = (item) => {
+    const trigger = item.querySelector('.faq-trigger');
+    const answer = item.querySelector('.faq-a');
+    item.classList.add('open');
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+    if (answer) {
+      answer.setAttribute('aria-hidden', 'false');
+    }
+  };
+
+  if (faqItems.length) {
+    faqItems.forEach((item) => {
+      const trigger = item.querySelector('.faq-trigger');
+      const answer = item.querySelector('.faq-a');
+      if (!trigger || !answer) return;
+
+      // ensure collapsed on load
+      closeFaqItem(item);
+
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach((other) => {
+          if (other !== item) {
+            closeFaqItem(other);
+          }
+        });
+        if (isOpen) {
+          closeFaqItem(item);
+        } else {
+          openFaqItem(item);
+        }
+      });
+    });
+  }
+
   function openModal(e){
     e && e.preventDefault();
     if (!modal) return;
