@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // FAQ accordion
   const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+  let activeFaqItem = null;
 
   const closeFaqItem = (item) => {
     const trigger = item.querySelector('.faq-trigger');
@@ -247,15 +248,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       trigger.addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
-        faqItems.forEach((other) => {
-          if (other !== item) {
-            closeFaqItem(other);
-          }
-        });
+        if (activeFaqItem && activeFaqItem !== item) {
+          closeFaqItem(activeFaqItem);
+        }
         if (isOpen) {
           closeFaqItem(item);
+          activeFaqItem = null;
         } else {
           openFaqItem(item);
+          activeFaqItem = item;
         }
       });
     });
